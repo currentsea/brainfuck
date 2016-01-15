@@ -19,7 +19,7 @@ class RandomFileTrollInterpreter(TrollInterpreter):
         with open('log_{when}.txt'.format(
             when=strftime("%a_%d_%b_%Y_%H_%M_%S", localtime())),
                   'w') as f:
-            f.write('LOL' * 1000)
+            f.write('LOL\n' * 1000)
 
 
 class WebbrowserTrollInterpreter(TrollInterpreter):

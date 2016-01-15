@@ -148,7 +148,7 @@ class TrollInterpreter(Interpreter):
 
     # Do not override
     def execute(self, code):
-        if code == "HELP":
+        if code == "HELPPLZ!!!":
             self.printDirective()
 
         else:
@@ -159,7 +159,7 @@ class TrollInterpreter(Interpreter):
 
     # Do not override
     def printDirective(self):
-        print("\nLONG LIVE THE TROLL!\n")
+        print("\nLONG LIVE BRAINFUCK!\n")
 
         for alias, char in self.aliases.items():
             print("       {alias} --> {char}".format(

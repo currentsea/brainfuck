@@ -1,6 +1,7 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from random import choice, random
+from re import match
 from Trolls import *
 from Nice import *
 
@@ -12,7 +13,7 @@ if __name__ == '__main__':
                         type=str, default="nice",
                         choices=["nice", "reset",
                                  "chars", "file",
-                                 "browser"],
+                                 "browser", "random"],
                         help="interpreter to use")
     parser.add_argument("-l", "--launch", action='store_true',
                         default=False, help=("whether or not to launch "
@@ -20,10 +21,23 @@ if __name__ == '__main__':
                                              "file or code has been provided"))
     parser.add_argument("-f", "--file", default=None, type=str,
                         help="Brainfuck file to run (optional)")
+    parser.add_argument("-c", "--code", default=None, type=str,
+                        help="Brainfuck code to run (optional)")
+    parser.add_argument("-v", "--version", action='store_true',
+                        default=False, help=("Brainfuck interpreter "
+                                             "version"))
 
     args = parser.parse_args()
     interpreter = None
     stdout = False
+
+    if args.version:
+        print("Epic Brainfuck 1.0.0")
+        sys.exit(0)
+
+    if args.interpreter == "random":
+        args.interpreter = choice(["nice", "reset", "chars",
+                                   "file", "browser"])
 
     if args.interpreter == "nice":
         interpreter = NiceInterpreter()
@@ -39,11 +53,14 @@ if __name__ == '__main__':
 
     elif args.interpreter == "browser":
         interpreter = WebbrowserTrollInterpreter()
-                        
+
     else:
         print("Unknown interpreter '{interpreter}'".format(
             interpreter=args.interpreter))
         sys.exit(1)
+
+    if args.code is not None:
+        interpreter.execute(args.code)
 
     if args.file is not None:
         if len(args.file) > 3 and args.file[-3:] == '.bf':
@@ -51,9 +68,6 @@ if __name__ == '__main__':
                 with open(args.file) as f:
                     code = f.read()
                     interpreter.execute(code)
-
-                if not args.launch:
-                    sys.exit(1)
 
             except IOError:
                 if args.interpreter == 'nice':
@@ -74,7 +88,11 @@ if __name__ == '__main__':
                 print("Your code is broken. It failed.")
 
             sys.exit(1)
-                
+
+    if (args.code is not None or args.file is not None) and \
+       not args.launch:
+        sys.exit(1)
+
     while True:
         try:
             if stdout:
@@ -88,6 +106,18 @@ if __name__ == '__main__':
                 if args.interpreter == 'nice' or \
                    random() > 0.75:
                     sys.exit(0)
+
+            elif code == 'PTRPLZ':
+                if args.interpreter == 'nice' or \
+                   random() > 0.75:
+                    print(interpreter.ptr)
+
+            elif match('^ARRPLZ\[\d*:\d*\]', code) or \
+                 match('^ARRPLZ\[\d+]', code):
+                if args.interpreter == 'nice' or \
+                   random() > 0.75:
+                    indices = code[6:]
+                    print(eval("interpreter.array" + indices))
 
             else:
                 stdout = interpreter.execute(code)
