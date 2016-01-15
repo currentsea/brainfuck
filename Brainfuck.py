@@ -1,5 +1,6 @@
 from __future__ import print_function
-from argparse import ArgumentParser
+from argparse import ArgumentParser, \
+     RawTextHelpFormatter
 from random import choice, random
 from re import match
 from Trolls import *
@@ -8,24 +9,46 @@ from Nice import *
 import sys
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description="Brainfuck Console")
+    parser = ArgumentParser(description="Brainfuck Console",
+                            formatter_class=RawTextHelpFormatter,
+                            add_help=False)
+    parser.add_argument("-h", "--help", action="help",
+                        help="display documentation\n ")
     parser.add_argument("-i", "--interpreter",
                         type=str, default="nice",
-                        choices=["nice", "reset",
-                                 "chars", "file",
-                                 "browser", "random"],
-                        help="interpreter to use")
+                        help=(
+                            "Interpreter specification.\n"
+                            "There are six options here:\n\n"
+                            "'nice'    - traditional Brainfuck\n"
+                            "            interpreter, no shenanigans\n\n"
+                            "'reset'   - resets character array to all\n"
+                            "            zeros and the array pointer to\n"
+                            "            point at that zeroth element of\n"
+                            "            that array after each execution\n\n"
+                            "'chars'   - changes the eight characters used\n"
+                            "            when coding and the semantics behind\n"
+                            "            them after each execution\n\n"
+                            "'file'    - writes 'LOL' 1000 times to a 'log'\n"
+                            "            file after every executation\n\n"
+                            "'browser' - opens a tab in your browser playing\n"
+                            "            the 'Troll Song' sung by Eduard Khil\n"
+                            "            on YouTube after every execution\n\n"
+                            "'random'  - choose an interpreter at random\n "))
     parser.add_argument("-l", "--launch", action='store_true',
-                        default=False, help=("whether or not to launch "
-                                             "the console when a Brainfuck "
-                                             "file or code has been provided"))
+                        default=False, help=(
+                            "Whether or not to launch the\n"
+                            "console when Brainfuck code\n"
+                            "as been provided. Note that\n"
+                            "this argument is not necessary\n"
+                            "should no file be provided. The\n"
+                            "console will start automatically\n "))
     parser.add_argument("-f", "--file", default=None, type=str,
-                        help="Brainfuck file to run (optional)")
+                        help="Brainfuck file to run (optional)\n ")
     parser.add_argument("-c", "--code", default=None, type=str,
-                        help="Brainfuck code to run (optional)")
+                        help="Brainfuck code to run (optional)\n ")
     parser.add_argument("-v", "--version", action='store_true',
-                        default=False, help=("Brainfuck interpreter "
-                                             "version"))
+                        default=False, help=("Display Brainfuck "
+                                             "interpreter version"))
 
     args = parser.parse_args()
     interpreter = None
@@ -34,6 +57,11 @@ if __name__ == '__main__':
     if args.version:
         print("Epic Brainfuck 1.0.0")
         sys.exit(0)
+
+    if args.interpreter not in ("nice", "reset", "chars",
+                                "file", "browser", "random"):
+        print("Invalid interpreter option!")
+        sys.exit(1)
 
     if args.interpreter == "random":
         args.interpreter = choice(["nice", "reset", "chars",
