@@ -1,0 +1,6 @@
+*.pyc
+log*
+
+# IntelliJ files
+.idea
+brainfuck.iml
