@@ -1,3 +1,15 @@
+"""
+Brainfuck.py
+
+This is the main Brainfuck console that combines
+all of the interpreters together and surfaces them
+all through the command line by calling 'Brainfuck.py'
+and setting the appropriate flags.
+
+Please refer to the 'help' strings for each flag for
+further information about this module.
+
+"""
 from __future__ import print_function
 from argparse import ArgumentParser, \
      RawTextHelpFormatter
@@ -29,7 +41,7 @@ if __name__ == '__main__':
                             "            when coding and the semantics behind\n"
                             "            them after each execution\n\n"
                             "'file'    - writes 'LOL' 1000 times to a 'log'\n"
-                            "            file after every executation\n\n"
+                            "            file after every execution\n\n"
                             "'browser' - opens a tab in your browser playing\n"
                             "            the 'Troll Song' sung by Eduard Khil\n"
                             "            on YouTube after every execution\n\n"
@@ -87,6 +99,9 @@ if __name__ == '__main__':
             interpreter=args.interpreter))
         sys.exit(1)
 
+    # Execute ALL provided code, which means that
+    # if both the '-c' and '-f' flags are set, both
+    # will be executed
     if args.code is not None:
         interpreter.execute(args.code)
 
@@ -103,6 +118,8 @@ if __name__ == '__main__':
                           "Please double check that the "
                           "path provided is accessible to me.")
 
+                # Troll interpreters provide useless
+                # debugging information
                 else:
                     print("Your code is broken. It failed.")
 
@@ -112,6 +129,8 @@ if __name__ == '__main__':
             if args.interpreter == 'nice':
                 print("Invalid Brainfuck File!")
 
+            # Troll interpreters provide useless
+            # debugging information
             else:
                 print("Your code is broken. It failed.")
 
@@ -123,6 +142,9 @@ if __name__ == '__main__':
 
     while True:
         try:
+            # Add a newline if there is output
+            # to the terminal so that the '>>>'
+            # prompt has its own line to itself
             if stdout:
                 code = raw_input("\n>>> ")
 
@@ -135,13 +157,15 @@ if __name__ == '__main__':
                    random() > 0.75:
                     sys.exit(0)
 
+            # Get current 'ptr' value
             elif code == 'PTRPLZ':
                 if args.interpreter == 'nice' or \
                    random() > 0.75:
                     print(interpreter.ptr)
 
+            # Get current values of 'array'
             elif match('^ARRPLZ\[\d*:\d*\]', code) or \
-                 match('^ARRPLZ\[\d+]', code):
+                    match('^ARRPLZ\[\d+]', code):
                 if args.interpreter == 'nice' or \
                    random() > 0.75:
                     indices = code[6:]
@@ -150,5 +174,8 @@ if __name__ == '__main__':
             else:
                 stdout = interpreter.execute(code)
 
+        # Protection against seeing the Python internals
+        # while running the program, as well as making it
+        # more difficult to quit out of it.
         except KeyboardInterrupt:
             stdout = False

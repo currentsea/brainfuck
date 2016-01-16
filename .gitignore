@@ -2,5 +2,6 @@
 log*
 
 # IntelliJ files
+pmip
 .idea
 brainfuck.iml
