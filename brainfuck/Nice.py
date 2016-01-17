@@ -13,6 +13,9 @@ from __future__ import print_function
 from Base import Interpreter
 
 
+__all__ = ['NiceInterpreter']
+
+
 class NiceInterpreter(Interpreter):
     """
     Traditional Brainfuck interpreter that sticks with the

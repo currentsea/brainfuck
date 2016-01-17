@@ -24,6 +24,10 @@ from webbrowser import open_new_tab
 from Base import TrollInterpreter
 
 
+__all__ = ['ResetTrollInterpreter', 'SetCharsTrollInterpreter',
+           'RandomFileTrollInterpreter', 'WebbrowserTrollInterpreter']
+
+
 class ResetTrollInterpreter(TrollInterpreter):
     """
     Troll interpreter that resets ``ptr`` and

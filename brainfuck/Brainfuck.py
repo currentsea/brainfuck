@@ -9,6 +9,68 @@ and setting the appropriate flags.
 Please refer to the 'help' strings for each flag for
 further information about this module.
 
+If the console has been launched, you will see something
+like this prompting you for characters:
+
+>>>
+
+You are free to type any Brainfuck code that you want, and
+it will be interpreted and executed automatically. Let's increment
+`array[0]` by 40 and then hit ENTER:
+
+>>> ++++++++++++++++++++++++++++++++++++++++
+>>>
+
+Want to double check that you in fact added 40 to array[0]? As
+`ptr` currently points at zero, you can call `.` to print out
+the character stored at array[0], OR you can call the
+following special command:
+
+>>> ARRPLZ[0]
+-
+>>>
+
+`ARRPLZ` can also take arguments in the form of `[start : end]`,
+but do note that the endpoint is EXCLUSIVE.
+
+In case you're simply tired of having your brain "fucked with,"
+type the following:
+
+>>> GMTFOH
+
+~
+
+FYI: GMTFOH = "Get me the fuck out of here"
+
+Feeling rather adventurous and want to try some EPIC Brainfuck?
+Then launch the console with an interpreter other than the "nice"
+one! How are things different? Well, first, you need to know what
+the eight important characters are so that the modified Brainfuck
+will be properly interpreted. You can do so by typing:
+
+>>> HELPPLZ!!!
+
+LONG LIVE BRAINFUCK!
+
+       1 --> >
+       q --> ,
+       e --> <
+       4 --> -
+       g --> +
+       t --> [
+       w --> ]
+       . --> .
+
+LONG LIVE THE TROLL!
+
+>>>
+
+For other special commands (i.e. `PTRPLZ`, `ARRPLZ`, and `GMTFOH`),
+the interpreter will respond to those commands only 25% of the time.
+Yes, that means you will have to type the command about four times
+before it will respond. That is the naturing of trolling and further
+"fucking with" the mind.
+
 """
 from __future__ import print_function
 from argparse import ArgumentParser, \
@@ -20,8 +82,10 @@ from Nice import *
 
 import sys
 
+VERSION = '1.0.0'
+
 if __name__ == '__main__':
-    parser = ArgumentParser(description="Brainfuck Console",
+    parser = ArgumentParser(description="Brainfuck Interactive Console",
                             formatter_class=RawTextHelpFormatter,
                             add_help=False)
     parser.add_argument("-h", "--help", action="help",
@@ -67,7 +131,7 @@ if __name__ == '__main__':
     stdout = False
 
     if args.version:
-        print("Epic Brainfuck 1.0.0")
+        print("Epic Brainfuck {version}".format(version=VERSION))
         sys.exit(0)
 
     if args.interpreter not in ("nice", "reset", "chars",
@@ -139,6 +203,9 @@ if __name__ == '__main__':
     if (args.code is not None or args.file is not None) and \
        not args.launch:
         sys.exit(1)
+
+    print("Brainfuck Interactive Console")
+    print("-----------------------------")
 
     while True:
         try:

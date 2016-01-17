@@ -110,7 +110,7 @@ You are free to type any Brainfuck code that you want, and it will be interprete
 ```
 
 Want to double check that you in fact added 40 to ```array[0]```? As ```ptr``` currently points at zero, you can call ```.``` to
-print out the character stored at ```array[0]```, OR you can call the following special comamand:
+print out the character stored at ```array[0]```, OR you can call the following special command:
 ```
 ...
 >>> ARRPLZ[0]

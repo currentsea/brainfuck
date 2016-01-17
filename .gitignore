@@ -5,3 +5,7 @@ log*
 pmip
 .idea
 brainfuck.iml
+
+# setup.py files
+dist
+brainfuck.egg-info

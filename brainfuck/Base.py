@@ -10,6 +10,9 @@ from random import choice
 from sys import stdin
 
 
+__all__ = ['Interpreter', 'TrollInterpreter']
+
+
 class Interpreter(object):
     """
     Base interpreter upon which all other interpreters are derived.
