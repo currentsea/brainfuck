@@ -26,7 +26,7 @@ The code was written so as to have minimal dependencies on any external librarie
 itself. Once you have Python on your machine, you can now download the code!
 
 # Installation
-There are two ways to install this code. You can either run the following command from the terminal:
+There are three ways to install this code. If you want the most current (development) version of the source code, you can either run the following command from the terminal:
 ```
 git clone https://github.com/gfyoung/brainfuck.git
 ```
@@ -34,10 +34,20 @@ git clone https://github.com/gfyoung/brainfuck.git
 **OR**
 
 you can click [here](https://github.com/gfyoung/brainfuck/archive/master.zip) to download a ZIP file of the ```master```
-branch and unzip the files yourself locally.
+branch and unzip the files locally.
 
-Once you have the files located somewhere in your locally directory, ```cd``` to that directory to make sure all files
-were successfully downloaded. If so, you have successfully installed the codebase!
+Once downloaded, run ```python setup.py build_ext -i``` in the terminal to do an inplace installation, just in case you already have ```brainfuck``` installed elsewhere. You can also run ```python setup.py install``` if that does not apply.
+
+If you want to download the most recent, stable version of the source code, run the following command in the terminal:
+```
+pip install brainfuck
+```
+
+If ```pip``` is having issues, visit the download page [here](https://pypi.python.org/pypi/brainfuck/1.0.0) to download
+a ZIP file of the source code and follow the instructions described above when downloading a ZIP file of the ```master```branch.
+
+Once you have the files located somewhere in your local directory, ```cd``` to that directory to make sure all files
+were successfully downloaded. If so, you have successfully installed the source code!
 
 # Usage
 The main file that you want to run is ```Brainfuck.py```. Not only is it the only Python executable, the other three files
@@ -163,11 +173,11 @@ For other special commands (i.e. ```PTRPLZ```, ```ARRPLZ```, and ```GMTFOH```), 
 **25%** of the time. Yes, that means you will have to type the command about **four** times before it will respond. That is the naturing
 of trolling and further "fucking with" the mind.
 
-# Bugs
-Find a bug in the code? Submit an issue [here](https://github.com/gfyoung/brainfuck/issues)!
+# Bugs and Features
+Find a bug in the code? Want another feature added to the codebase? Submit an issue **OR** feature request [here](https://github.com/gfyoung/brainfuck/issues)!
 
 # Contributing
 Interested in contributing? You are more than welcome! To start, **fork** this repository and clone your fork to your computer. Then,
 to start hacking away, create a **feature branch** off ```master```. Once, you're done, submit it as a pull request (PR)! Requirements
 are not very stringent. Just make sure that you properly document changes in your commits (e.g. descriptive commit messages) and / or
-add documentation to any code that you change should you **change** or **add** any functionality.
+add documentation to any code that you modify should you **change** or **add** any functionality.
