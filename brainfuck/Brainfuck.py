@@ -231,8 +231,8 @@ if __name__ == '__main__':
                     print(interpreter.ptr)
 
             # Get current values of 'array'
-            elif match('^ARRPLZ\[\d*:\d*\]', code) or \
-                    match('^ARRPLZ\[\d+]', code):
+            elif match('^ARRPLZ\[\d*:\d*\]$', code) or \
+                    match('^ARRPLZ\[\d+]$', code):
                 if args.interpreter == 'nice' or \
                    random() > 0.75:
                     indices = code[6:]
