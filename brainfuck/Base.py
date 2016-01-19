@@ -134,6 +134,7 @@ class Interpreter(object):
 
         """
         stdout = False
+        jumps = {}
         index = 0
 
         while index < len(code):
@@ -168,22 +169,28 @@ class Interpreter(object):
                 paren = 1
 
                 if self.array[self.ptr] == 0:
-                    index += 1
+                    if index in jumps:
+                        index = jumps[index]
 
-                    while paren != 0 and index < len(code):
-                        char = code[index]
+                    else:
+                        oldindex = index
+                        while paren != 0:
+                            index += 1
 
-                        if char == self.lbracket:
-                            paren += 1
+                            if index == len(code) and paren != 0:
+                                self.handleError(side='left')
+                                return stdout
 
-                        elif char == self.rbracket:
-                            paren -= 1
+                            char = code[index]
 
-                        index += 1
+                            if char == self.lbracket:
+                                paren += 1
 
-                    if index == len(code) and paren != 0:
-                        self.handleError(side='left')
-                        break
+                            elif char == self.rbracket:
+                                paren -= 1
+
+                        jumps[oldindex] = index
+                        jumps[index] = oldindex
 
                 index += 1
 
@@ -191,22 +198,28 @@ class Interpreter(object):
                 paren = -1
 
                 if self.array[self.ptr] != 0:
-                    index -= 1
+                    if index in jumps:
+                        index = jumps[index]
 
-                    while paren != 0 and index >= 0:
-                        char = code[index]
+                    else:
+                        oldindex = index
+                        while paren != 0:
+                            index -= 1
 
-                        if char == self.lbracket:
-                            paren += 1
+                            if index < 0 and paren != 0:
+                                self.handleError(side='right')
+                                return stdout
 
-                        elif char == self.rbracket:
-                            paren -= 1
+                            char = code[index]
 
-                        index -= 1
+                            if char == self.lbracket:
+                                paren += 1
 
-                    if index < 0 and paren != 0:
-                        self.handleError(side='right')
-                        break
+                            elif char == self.rbracket:
+                                paren -= 1
+
+                        jumps[oldindex] = index
+                        jumps[index] = oldindex
 
                 index += 1
 
