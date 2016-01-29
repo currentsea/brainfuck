@@ -50,8 +50,7 @@ Once you have the files located somewhere in your local directory, ```cd``` to t
 were successfully downloaded. If so, you have successfully installed the source code!
 
 # Usage
-The main file that you want to run is ```Brainfuck.py```. Not only is it the only Python executable, the other three files
-are modules on which this file is dependent.
+The main file that you want to run is ```Brainfuck.py```. It is the only Python executable for starters, and it is also dependent on the other three files provided.
 
 ```
 Brainfuck.py [-h] [-i] [-l] [-f file] [-c code] [-v]
@@ -73,7 +72,7 @@ There are six options here:
 
 -l : whether or not to launch the Brainfuck console after running a piece
      of Brainfuck code. Note that this argument is not necessary should no
-     code provided. The console will start automatically
+     code be provided. The console will start automatically
 
 -f : the path to a Brainfuck code file that is to be run. The path can be
      absolute, or it can be relative to the location of this executable
