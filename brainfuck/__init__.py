@@ -48,7 +48,13 @@ Brainfuck.py
 
 """
 
+import os
+import sys
+
 if __name__ == 'brainfuck':
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    sys.path.insert(0, cwd)
+
     import Base
     import Nice
     import Trolls
