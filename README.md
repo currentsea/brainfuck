@@ -43,7 +43,7 @@ If you want to download the most recent, stable version of the source code, run 
 pip install brainfuck
 ```
 
-If ```pip``` is having issues, visit the download page [here](https://pypi.python.org/pypi/brainfuck/1.0.0) to download
+If ```pip``` is having issues, visit the download page [here](https://pypi.python.org/pypi/brainfuck) to download
 a ZIP file of the source code and follow the instructions described above when downloading a ZIP file of the ```master```branch.
 
 Once you have the files located somewhere in your local directory, ```cd``` to that directory to make sure all files
