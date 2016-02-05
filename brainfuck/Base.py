@@ -6,8 +6,8 @@ then be sub-classed in subsequent modules.
 
 """
 from __future__ import print_function
+from sys import stdin, stdout
 from random import choice
-from sys import stdin
 
 
 __all__ = ['Interpreter', 'TrollInterpreter']
@@ -236,6 +236,7 @@ class Interpreter(object):
         """
         char = self.array[self.ptr]
         print(chr(char), end='')
+        stdout.flush()
 
     def reset(self):
         """
