@@ -202,7 +202,7 @@ if __name__ == '__main__':
 
     if (args.code is not None or args.file is not None) and \
        not args.launch:
-        sys.exit(1)
+        sys.exit(0)
 
     print("Brainfuck Interactive Console")
     print("-----------------------------")
