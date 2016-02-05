@@ -82,7 +82,7 @@ from Nice import *
 
 import sys
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 if __name__ == '__main__':
     parser = ArgumentParser(description="Brainfuck Interactive Console",
