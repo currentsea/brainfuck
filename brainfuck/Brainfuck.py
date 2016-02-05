@@ -170,7 +170,7 @@ if __name__ == '__main__':
         interpreter.execute(args.code)
 
     if args.file is not None:
-        if len(args.file) > 3 and args.file[-3:] == '.bf':
+        if len(args.file) > 3:
             try:
                 with open(args.file) as f:
                     code = f.read()
