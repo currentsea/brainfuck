@@ -149,11 +149,11 @@ class Interpreter(object):
                 index += 1
 
             elif char == self.plus:
-                self.array[self.ptr] = (self.array[self.ptr] + 1) % 128
+                self.array[self.ptr] = (self.array[self.ptr] + 1) % 256
                 index += 1
 
             elif char == self.minus:
-                self.array[self.ptr] = (self.array[self.ptr] - 1) % 128
+                self.array[self.ptr] = (self.array[self.ptr] - 1) % 256
                 index += 1
 
             elif char == self.period:
